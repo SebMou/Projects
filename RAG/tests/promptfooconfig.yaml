@@ -1,0 +1,39 @@
+prompts: ['{{query}}', prompt.txt]
+providers: ['exec: test_retrieval.py', huggingface:text-generation:lmsys/fastchat-t5-3b-v1.0]
+# tests:
+#   - vars:
+#       query: In a hosting or batch transform container, where are the model files located?
+#     assert:
+#       - type: contains-all
+#         value: ['amazon-sagemaker-toolkits.md', 'transform container']
+        
+# prompts: [prompt.txt]
+# providers: [huggingface:text-generation:lmsys/fastchat-t5-3b-v1.0]
+
+tests:
+  - vars:
+      query: In a hosting or batch transform container, where are the model files located?
+    assert:
+      - type: contains-all
+        value: ['amazon-sagemaker-toolkits.md', 'transform container']
+  - vars:
+      query: In a hosting or batch transform container, where are the model files located?
+      context: file://test_dir/amazon-sagemaker-toolkits.md
+    assert:
+      - type: contains
+        value: 'transform container'
+      - type: factuality
+        value: In a hosting or batch transform container, the model files are located in the same folder to which they were written during training
+      - type: answer-relevance
+        threshold: 0.9
+
+  - vars:
+      query: What is SageMaker?
+      context: file://test_dir//deeplens-getting-started-launch-sagemaker.md
+    assert:
+      - type: contains
+        value: 'Sagemaker'
+      - type: factuality
+        value: SageMaker is a fully managed machine learning service that enables data scientists and developers to build and train machine learning models using a Jupyter notebook instance
+      - type: answer-relevance
+        threshold: 0.9

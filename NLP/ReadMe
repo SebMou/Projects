@@ -1,0 +1,11 @@
+These files were created using Spyder, from Anaconda, using Python version 3.7, and Windows.
+Though the original challenge requested a docker-compose virtual machine, the computer on which this code was written could not
+install it due to compatibility issues.
+
+In order to run the API, create a virtual environment (in my case using the windows command prompt). Then, inside this environment,
+reach the directory where the "PCflask.py" file is saved and run it. This should give you the http address you will need.
+Using this address, open a new command prompt, and run "curl address/what you would like to search", or directly in a web browser
+write "address/what you would like to search".
+Any spaces in our search must be replaced by %20.
+Searches will yield only entries which begin with the terms in the search, not if the terms appear anywhere in the name.
+Searches are case sensitive.
